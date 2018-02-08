@@ -2,36 +2,34 @@
     <div>
 
         <div>
-            <b-button @click="increment" size="lg" variant="success">+</b-button>
-            <b-button @click="decrement" size="lg" variant="danger">-</b-button>
+            <b-button @click="increment"  variant="success">dodaj obrazki</b-button>
+            <b-button @click="decrement"  variant="danger">wyrzuć obrazki</b-button>
 
             <b-card-group deck>
-                <div class="images d-flex justify-content-center">
+                <div class="container">
+                <div class="d-flex align-content-start flex-wrap">
+                    <div class="images">
 
 
-                        <div v-for="number in count" :key="number.id">
-                            <draggable v-model="myList"
-                                       :options="{animation:100, scroll: true, scrollSensitivity: 200, scrollSpeed: 20}">
+                        <draggable v-model="myList"
+                                   :options="{animation:100, scroll: true, scrollSensitivity: 200, scrollSpeed: 20}">
 
                             <b-card v-for="pic in pictures" :key="pic.id"
                                     :img-src="pic.url"
                                     img-alt="Img"
                                     img-top>
                                 <p class="card-text">
-
                                     {{pic.title}}
                                 </p>
 
-                                <div slot="footer">
+                                <div slot="header">
                                     <small class="text-muted">LPP</small>
                                 </div>
 
                             </b-card>
-                            </draggable>
-                        </div>
-
-
-
+                        </draggable>
+                    </div>
+                </div>
                 </div>
             </b-card-group>
             <b-btn variant="primary" href="/login">Back to login</b-btn>
@@ -83,17 +81,25 @@
     }
 </script>
 
-<style scoped>
+<style>
+
+    .container {
+        width: 1000px;
+        height: 1000px;
+
+    }
 
     .images {
-        width: 20%;
-        display: grid;
-        grid-template-columns: 30% 30% 30%;
-        grid-gap: 8px;
+        width: 10%;
         position: absolute;
         left: 50%;
         top: 15%;
         transform: translateX(-50%);
+
+    }
+
+    p {
+        font-size: 12px;
     }
 </style>
 

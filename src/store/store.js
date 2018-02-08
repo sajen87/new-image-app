@@ -8,15 +8,10 @@ export const store = new Vuex.Store({
     state: {
         user: null,
         pics: [],
-        message: "to sekretna wiadomość w chuj",
-        // pictureNumber: 2,
         mylist: [],
-        count: 1
+        count: 2
     },
     getters: {
-        // pictureNumbers(state) {
-        //     return state.pictureNumber;
-        // },
         picNumb(state) {
            return state.count
         }
@@ -29,7 +24,10 @@ export const store = new Vuex.Store({
             state.count++
         },
         decrement(state) {
-            state.count--
+            if(state.count >= 1) {
+                state.count--
+            }
+
         }
 
     },
