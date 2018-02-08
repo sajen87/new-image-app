@@ -9,22 +9,24 @@ export const store = new Vuex.Store({
         user: null,
         pics: [],
         message: "to sekretna wiadomość w chuj",
-        pictureNumber: 5
+        pictureNumber: 4,
+        mylist: []
     },
     getters: {
-      pictureNumbers(state) {
-          return state.pictureNumber;
-      }
+        pictureNumbers(state) {
+            return state.pictureNumber;
+        }
     },
     mutations: {
         FETCH_PICTURES(state, pics) {
             state.pics = pics;
-            }
+        }
+
 
     },
     actions: {
-        fetchData({ commit, getters }) {
-          return new Promise(  (resolve) => {
+        fetchData({commit, getters}) {
+            return new Promise((resolve) => {
                 Vue.http.get("https://jsonplaceholder.typicode.com/photos")
                     .then((response) => response.body.slice(0, getters.pictureNumbers))
                     .then((photos) => {

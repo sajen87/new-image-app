@@ -1,48 +1,38 @@
 <template>
     <div>
 
-            <b-jumbotron header="Bootstrap Vue" lead="Bootstrap 4 Components for Vue.js 2" >
-                <p>For more information visit website</p>
-                <div>
+        <b-jumbotron header="Bootstrap Vue" lead="Bootstrap 4 Components for Vue.js 2">
+            <p>For more information visit website</p>
 
-                    <b-card-group deck>
-                        <!--<draggable v-model="pictures">-->
+            <div>
+
+                <b-card-group deck>
+
+                    <draggable v-model="myList" :options="{animation:100, scroll: true, scrollSensitivity: 200, scrollSpeed: 20}">
+                        <transition-group>
                         <b-card v-for="pic in pictures" :key="pic.id"
-                                :title= "pic.id"
+                                :title="pic.id"
                                 :img-src="pic.url"
                                 img-alt="Img"
                                 img-top>
                             <p class="card-number">
                                 {{pic.title}}
                             </p>
+
                             <div slot="footer">
                                 <small class="text-muted">Last updated 3 mins ago</small>
                             </div>
+
                         </b-card>
-                        <!--</draggable>-->
-                    </b-card-group>
+                        </transition-group>
+                    </draggable>
 
-                </div>
+                </b-card-group>
 
-                <b-btn variant="primary" href="/login">Back to login</b-btn>
-            </b-jumbotron>
+            </div>
 
-
-
-            <!--<b-container fluid class="p-4 bg-dark">-->
-                <!--<b-row>-->
-
-                    <!--<b-col>-->
-                        <!--<b-img thumbnail fluid src="https://lorempixel.com/250/250/technics/4/" alt="Thumbnail" />-->
-                    <!--</b-col>-->
-                    <!--<b-col>-->
-                        <!--<b-img thumbnail fluid src="https://lorempixel.com/250/250/technics/8/" alt="Thumbnail" />-->
-                    <!--</b-col>-->
-                    <!--<b-col>-->
-                        <!--<b-img thumbnail fluid src="https://lorempixel.com/250/250/technics/4/" alt="Thumbnail" />-->
-                    <!--</b-col>-->
-                <!--</b-row>-->
-            <!--</b-container>-->
+            <b-btn variant="primary" href="/login">Back to login</b-btn>
+        </b-jumbotron>
 
 
     </div>
@@ -56,10 +46,8 @@
             draggable,
         },
 
-        data(){
-            return{
-
-            }
+        data() {
+            return {}
         },
         created() {
             this.$store.dispatch("fetchData").then(() => {
@@ -67,12 +55,16 @@
             })
         },
         computed: {
-            pictures(){
+            pictures() {
                 console.log(this.$store.state.pics);
-
                 return this.$store.state.pics;
-
+            },
+            myList: {
+                get() {
+                    return this.$store.state.myList
+                }
             }
+
 
         }
     }
