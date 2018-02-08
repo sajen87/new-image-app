@@ -1,38 +1,41 @@
 <template>
     <div>
 
-        <b-jumbotron header="Bootstrap Vue" lead="Bootstrap 4 Components for Vue.js 2">
-            <p>For more information visit website</p>
+        <div>
+            <b-button @click="increment" size="lg" variant="success">+</b-button>
+            <b-button @click="decrement" size="lg" variant="danger">-</b-button>
 
-            <div>
+            <b-card-group deck>
+                <div class="images d-flex justify-content-center">
 
-                <b-card-group deck>
 
-                    <draggable v-model="myList" :options="{animation:100, scroll: true, scrollSensitivity: 200, scrollSpeed: 20}">
-                        <transition-group>
-                        <b-card v-for="pic in pictures" :key="pic.id"
-                                :title="pic.id"
-                                :img-src="pic.url"
-                                img-alt="Img"
-                                img-top>
-                            <p class="card-number">
-                                {{pic.title}}
-                            </p>
+                        <div v-for="number in count" :key="number.id">
+                            <draggable v-model="myList"
+                                       :options="{animation:100, scroll: true, scrollSensitivity: 200, scrollSpeed: 20}">
 
-                            <div slot="footer">
-                                <small class="text-muted">Last updated 3 mins ago</small>
-                            </div>
+                            <b-card v-for="pic in pictures" :key="pic.id"
+                                    :img-src="pic.url"
+                                    img-alt="Img"
+                                    img-top>
+                                <p class="card-text">
 
-                        </b-card>
-                        </transition-group>
-                    </draggable>
+                                    {{pic.title}}
+                                </p>
 
-                </b-card-group>
+                                <div slot="footer">
+                                    <small class="text-muted">LPP</small>
+                                </div>
 
-            </div>
+                            </b-card>
+                            </draggable>
+                        </div>
 
+
+
+                </div>
+            </b-card-group>
             <b-btn variant="primary" href="/login">Back to login</b-btn>
-        </b-jumbotron>
+        </div>
 
 
     </div>
@@ -55,8 +58,11 @@
             })
         },
         computed: {
+            count() {
+                return this.$store.state.count;
+            },
             pictures() {
-                console.log(this.$store.state.pics);
+
                 return this.$store.state.pics;
             },
             myList: {
@@ -65,11 +71,30 @@
                 }
             }
 
-
+        },
+        methods: {
+            increment() {
+                this.$store.dispatch('increment')
+            },
+            decrement() {
+                this.$store.dispatch('decrement')
+            }
         }
     }
 </script>
 
 <style scoped>
 
+    .images {
+        width: 20%;
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        grid-gap: 8px;
+        position: absolute;
+        left: 50%;
+        top: 15%;
+        transform: translateX(-50%);
+    }
 </style>
+
+<!--:title="pic.id"-->
