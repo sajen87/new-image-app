@@ -3,7 +3,7 @@
         <h1>Login</h1>
         <input type="email" v-model="email" placeholder="Email"><br>
         <input type="password" v-model="password" placeholder="Password"><br>
-        <b-button variant="primary" @click="login">Zaloguj się</b-button>
+        <b-button variant="primary" @click.prevent="login">Zaloguj się</b-button>
         <p>Nie masz konta?
             <router-link to="/signup">Zapisz się</router-link>
         </p>
@@ -17,24 +17,28 @@
         name: "login",
         data: function () {
             return {
-                isAuthenticated: false,
+                status: false,
                 email: '',
                 password: '',
-                user: ''
+                user: null
             }
         },
 
         methods: {
             login() {
                 firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-                    function (user) {
-                        console.log(user.uid);
+                    (user) => {
+                        this.$router.replace('images');
                         alert("Udało Ci się połączyć")
                     },
-                    function (err) {
+                    (err) => {
+                        console.log(err);
                         alert("Ojoj coś poszło nie tak " + err.message)
                     }
                 )
+
+
+
             }
         }
     }

@@ -41,5 +41,6 @@ export default new Router({
                 requiresAuth: true
             }
         }
-    ]
+    ],
+    mode: 'history'
 })

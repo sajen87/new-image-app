@@ -31,7 +31,7 @@ firebase.initializeApp(config);
 new Vue({
     store: store,
     el: '#app',
-    router,
     components: {App},
+    router,
     template: '<App/>'
 })
