@@ -1,5 +1,6 @@
 <template>
     <div class="login">
+        <img src="../assets/lpp.jpg">
         <h1>Login</h1>
         <input type="email" v-model="email" placeholder="Email"><br>
         <input type="password" v-model="password" placeholder="Password"><br>
@@ -29,7 +30,6 @@
                 firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
                     (user) => {
                         this.$router.replace('images');
-                        alert("Udało Ci się połączyć")
                     },
                     (err) => {
                         console.log(err);
@@ -38,13 +38,16 @@
                 )
 
 
-
             }
         }
     }
 </script>
 
 <style scoped>
+    img {
+        margin: 80px 0;
+    }
+
     .login {
         margin-top: 40px;
     }
@@ -63,7 +66,7 @@
 
     p {
         margin-top: 40px;
-        font-size: 13px;
+        font-size: 16px;
     }
 
 

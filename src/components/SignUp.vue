@@ -1,5 +1,6 @@
 <template>
     <div class="sign-up">
+        <img src="../assets/lpp.jpg">
         <h1>Utwórz nowe konto</h1>
         <input type="email" v-model="email" placeholder="Email"><br>
         <input type="password" v-model="password" placeholder="Password"><br>
@@ -36,6 +37,9 @@
 </script>
 
 <style scoped>
+    img {
+        margin: 80px 0;
+    }
 
     .sign-up {
         margin-top: 40px;
@@ -59,8 +63,8 @@
         font-size: 12px;
     }
 
-    p {
+    span {
         margin-top: 40px;
-        font-size: 13px;
+        font-size: 16px;
     }
 </style>

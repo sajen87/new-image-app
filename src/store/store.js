@@ -9,11 +9,11 @@ export const store = new Vuex.Store({
         user: null,
         pics: [],
         mylist: [],
-        count: 2
+        count: 0
     },
     getters: {
         picNumb(state) {
-           return state.count
+            return state.count
         }
     },
     mutations: {
@@ -24,7 +24,7 @@ export const store = new Vuex.Store({
             state.count++
         },
         decrement(state) {
-            if(state.count >= 1) {
+            if (state.count >= 1) {
                 state.count--
             }
 
@@ -49,11 +49,11 @@ export const store = new Vuex.Store({
 
 
         },
-        increment ({ commit, dispatch }) {
+        increment({commit, dispatch}) {
             commit('increment');
             dispatch('fetchData');
         },
-        decrement ({ commit, dispatch }) {
+        decrement({commit, dispatch}) {
             commit('decrement');
             dispatch('fetchData');
 

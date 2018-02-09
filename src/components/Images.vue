@@ -1,41 +1,51 @@
 <template>
     <div>
+        <div>
+            <b-navbar toggleable type="dark" variant="primary" position="sticky">
+                <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
+                <b-navbar-brand>LPP</b-navbar-brand>
+                <b-collapse is-nav id="nav_text_collapse">
+                    <b-navbar-nav>
+                        <b-nav-text>Draggable Image App</b-nav-text>
+                    </b-navbar-nav>
+                </b-collapse>
+            </b-navbar>
+        </div>
 
         <div>
-            <b-button @click="increment"  variant="success">dodaj obrazki</b-button>
-            <b-button @click="decrement"  variant="danger">wyrzuć obrazki</b-button>
-
-            <b-card-group deck>
-                <div class="container">
-                <div class="d-flex align-content-start flex-wrap">
-                    <div class="images">
+            <div class="buttons">
+                <b-button @click="increment" variant="success">dodaj obrazki</b-button>
+                <b-button @click="decrement" variant="danger">wyrzuć obrazki</b-button>
+                <b-btn variant="primary" href="/login">Back to login</b-btn>
+            </div>
 
 
+            <div class="container">
+
+
+                <b-card-group columns>
                         <draggable v-model="myList"
                                    :options="{animation:100, scroll: true, scrollSensitivity: 200, scrollSpeed: 20}">
 
                             <b-card v-for="pic in pictures" :key="pic.id"
                                     :img-src="pic.url"
-                                    img-alt="Img"
-                                    img-top>
+                                    style="max-width: 20rem;"
+                                    class="mb-2"
+                            >
                                 <p class="card-text">
                                     {{pic.title}}
                                 </p>
 
-                                <div slot="header">
-                                    <small class="text-muted">LPP</small>
-                                </div>
-
                             </b-card>
+
+
                         </draggable>
-                    </div>
-                </div>
-                </div>
-            </b-card-group>
-            <b-btn variant="primary" href="/login">Back to login</b-btn>
+
+                </b-card-group>
+
+            </div>
+
         </div>
-
-
     </div>
 </template>
 
@@ -84,23 +94,38 @@
 <style>
 
     .container {
-        width: 1000px;
-        height: 1000px;
+        width: 100%;
 
     }
 
-    .images {
-        width: 10%;
-        position: absolute;
-        left: 50%;
-        top: 15%;
-        transform: translateX(-50%);
-
-    }
 
     p {
         font-size: 12px;
     }
+
+    .buttons {
+        margin-top: 40px;
+    }
+
 </style>
 
 <!--:title="pic.id"-->
+
+
+
+
+
+
+<!--<b-card v-for="pic in pictures" :key="pic.id"-->
+<!--:img-src="pic.url"-->
+<!--img-alt="Img"-->
+<!--img-top>-->
+<!--<p class="card-text">-->
+<!--{{pic.title}}-->
+<!--</p>-->
+
+<!--<div slot="header">-->
+<!--<small class="text-muted">LPP</small>-->
+<!--</div>-->
+
+<!--</b-card>-->
