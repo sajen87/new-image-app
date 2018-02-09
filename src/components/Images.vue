@@ -12,7 +12,6 @@
                 </b-collapse>
             </b-navbar>
         </div>
-
         <div>
             <div class="buttons">
                 <b-button @click="increment" variant="success">dodaj obrazki</b-button>
@@ -25,16 +24,19 @@
 
                 <b-card-group columns>
                     <draggable v-model="myList"
-                               :options="{animation:100, scroll: true, scrollSensitivity: 200, scrollSpeed: 20}">
+                               :options="{animation:100, scroll: true, scrollSensitivity: 200, scrollSpeed: 20}"
+                                @change="update">
 
-                        <b-card v-for="pic in pictures" :key="pic.id"
+                        <b-card v-for="(pic, index) in pictures" :key="pic.id"
                                 :img-src="pic.url"
                                 style="max-width: 20rem;"
                                 class="mb-2"
                         >
+                            <p @click="showInput">{{index}}</p>
                             <p class="card-text">
                                 {{pic.title}}
                             </p>
+                            <b-form-input class="invisible" type="text" v-model="pic.title" placeholder="Wpisz swój tekst"></b-form-input>
 
                         </b-card>
 
@@ -94,7 +96,14 @@
                 }).catch(function(error) {
                     // An error happened.
                 });
+            },
+            update(){
+                console.log(this.$store.state.pics)
+            },
+            showInput(){
+                alert("dzds")
             }
+
         }
     }
 </script>
@@ -125,6 +134,10 @@
 
     .container {
         margin-top: 40px;
+    }
+
+    img:hover {
+        cursor: pointer;
     }
 
 </style>

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/Login'
 import SignUp from '@/components/SignUp'
 import Images from '@/components/Images'
@@ -40,7 +39,7 @@ var router = new Router({
         }
     ],
     mode: 'history'
-})
+});
 
 router.beforeEach((to, from, next) => {
     let currentUser = firebase.auth().currentUser;
