@@ -1,12 +1,13 @@
 <template>
     <div>
         <div>
-            <b-navbar toggleable type="dark" variant="primary" position="sticky">
+            <b-navbar toggleable type="dark" variant="dark" position="sticky">
                 <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
                 <b-navbar-brand>LPP</b-navbar-brand>
+                <b-nav-text>Draggable Image App</b-nav-text>
                 <b-collapse is-nav id="nav_text_collapse">
-                    <b-navbar-nav>
-                        <b-nav-text>Draggable Image App</b-nav-text>
+                    <b-navbar-nav class="ml-auto">
+                        <b-button @click="logOut" variant="success">Wyloguj sie</b-button>
                     </b-navbar-nav>
                 </b-collapse>
             </b-navbar>
@@ -16,7 +17,6 @@
             <div class="buttons">
                 <b-button @click="increment" variant="success">dodaj obrazki</b-button>
                 <b-button @click="decrement" variant="danger">wyrzuć obrazki</b-button>
-                <b-btn variant="primary" href="/login">Back to login</b-btn>
             </div>
 
 
@@ -24,22 +24,22 @@
 
 
                 <b-card-group columns>
-                        <draggable v-model="myList"
-                                   :options="{animation:100, scroll: true, scrollSensitivity: 200, scrollSpeed: 20}">
+                    <draggable v-model="myList"
+                               :options="{animation:100, scroll: true, scrollSensitivity: 200, scrollSpeed: 20}">
 
-                            <b-card v-for="pic in pictures" :key="pic.id"
-                                    :img-src="pic.url"
-                                    style="max-width: 20rem;"
-                                    class="mb-2"
-                            >
-                                <p class="card-text">
-                                    {{pic.title}}
-                                </p>
+                        <b-card v-for="pic in pictures" :key="pic.id"
+                                :img-src="pic.url"
+                                style="max-width: 20rem;"
+                                class="mb-2"
+                        >
+                            <p class="card-text">
+                                {{pic.title}}
+                            </p>
 
-                            </b-card>
+                        </b-card>
 
 
-                        </draggable>
+                    </draggable>
 
                 </b-card-group>
 
@@ -51,6 +51,7 @@
 
 <script>
     import draggable from 'vuedraggable'
+    import firebase from 'firebase'
 
     export default {
         components: {
@@ -86,18 +87,23 @@
             },
             decrement() {
                 this.$store.dispatch('decrement')
+            },
+            logOut(){
+                firebase.auth().signOut().then(function() {
+
+                }).catch(function(error) {
+                    // An error happened.
+                });
             }
         }
     }
 </script>
 
-<style>
+<style scoped>
 
     .container {
         width: 100%;
-
     }
-
 
     p {
         font-size: 12px;
@@ -107,13 +113,23 @@
         margin-top: 40px;
     }
 
+    a {
+        color: white;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: yellow;
+        text-decoration: none;
+    }
+
+    .container {
+        margin-top: 40px;
+    }
+
 </style>
 
 <!--:title="pic.id"-->
-
-
-
-
 
 
 <!--<b-card v-for="pic in pictures" :key="pic.id"-->

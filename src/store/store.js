@@ -9,7 +9,8 @@ export const store = new Vuex.Store({
         user: null,
         pics: [],
         mylist: [],
-        count: 0
+        count: 0,
+        isLogged : false
     },
     getters: {
         picNumb(state) {

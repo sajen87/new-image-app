@@ -29,16 +29,23 @@
             login() {
                 firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
                     (user) => {
-                        this.$router.replace('images');
+                            this.status = true;
+                            if(this.status){
+                                this.$router.replace('images');
+                            }
+
+
                     },
                     (err) => {
+                        this.status = false;
                         console.log(err);
-                        alert("Ojoj coś poszło nie tak " + err.message)
+                        alert("Ojoj coś poszło nie tak ")
                     }
                 )
 
 
             }
+
         }
     }
 </script>

@@ -1,5 +1,3 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 import router from './router'
@@ -14,8 +12,7 @@ Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 Vue.use(VueResource);
 
-
-// Initialize Firebase
+var app;
 var config = {
     apiKey: "AIzaSyCpuJj4ZVyLY533g0mOWBqEdkzvhX1Zv2A",
     authDomain: "lpp-image-app.firebaseapp.com",
@@ -24,14 +21,19 @@ var config = {
     storageBucket: "lpp-image-app.appspot.com",
     messagingSenderId: "217358328034"
 };
+
 firebase.initializeApp(config);
+firebase.auth().onAuthStateChanged(function(user) {
+    if(!app) {
+        app = new Vue({
+            el: '#app',
+            template: '<App/>',
+            components: { App },
+            store: store,
+            router
+
+        });
+    }
+});
 
 
-/* eslint-disable no-new */
-new Vue({
-    store: store,
-    el: '#app',
-    components: {App},
-    router,
-    template: '<App/>'
-})
